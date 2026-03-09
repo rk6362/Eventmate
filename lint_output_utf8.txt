@@ -1,0 +1,26 @@
+﻿
+> temp_app@0.0.0 lint
+> eslint .
+
+
+C:\Users\User\Desktop\Eventmate\temp_app\src\context\AppContext.jsx
+  117:14  error  Fast refresh only works when a file only exports components. Move your React context(s) to a separate file                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-refresh/only-export-components
+  130:18  error  'setEvents' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           no-unused-vars
+  140:21  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  138 |     const storedRegistered = localStorage.getItem('eventMateRegistered');
+  139 |     
+> 140 |     if (storedUser) setUser(JSON.parse(storedUser));
+      |                     ^^^^^^^ Avoid calling setState() directly within an effect
+  141 |     if (storedSaved) setSavedEvents(JSON.parse(storedSaved));
+  142 |     if (storedRegistered) setRegisteredEvents(JSON.parse(storedRegistered));
+  143 |   }, []);  react-hooks/set-state-in-effect
+
+Γ£û 3 problems (3 errors, 0 warnings)
+
